@@ -5,8 +5,11 @@ import { useHistory } from "react-router";
 import Gratitude from "./../assets/grForm.png";
 import { useDispatch } from "react-redux";
 import { notEkleAPI } from "../actions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PostForm() {
+  const notify = () => toast("Başarıyla Eklendi");
   const dispatch = useDispatch();
   const {
     register,
@@ -80,9 +83,10 @@ export default function PostForm() {
           />
         </div>
 
-        <button type="submit" className="myButton">
+        <button onClick={notify} type="submit" className="myButton">
           Ekle
         </button>
+        <ToastContainer />
       </form>
     </div>
   );
