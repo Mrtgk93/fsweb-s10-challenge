@@ -44,19 +44,16 @@ export function alfred(state = baslangicDegerleri, action) {
         notlar: [...state.notlar, action.payload],
       };
     case NOT_SIL:
-      const filteredNot = state.notlar.filter(
-        (item) => action.payload !== item.id
-      );
-      localStorage.setItem(s10chLocalStorageKey, JSON.stringify(filteredNot));
-      return {
+      const filteredNot = {
         ...state,
-        notlar: filteredNot,
+        notlar: state.notlar.filter((item) => action.payload !== item.id),
       };
+      localStorageStateYaz(s10chLocalStorageKey, filteredNot);
+      return filteredNot;
+
     case BASLANGIC_DEGER:
-      return {
-        ...state,
-        notlar: baslangicNotlariniGetir(s10chLocalStorageKey),
-      };
+      return baslangicNotlariniGetir(s10chLocalStorageKey);
+
     default:
       return state;
   }
